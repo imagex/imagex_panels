@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ImageX Panels feature.
+ */
+
+include_once 'imagex_panels.features.inc';

@@ -12,4 +12,3 @@ features[variable][] = page_manager_node_view_disabled
 features[variable][] = page_manager_user_view_disabled
 features[variable][] = panels_mini_allowed_layouts
 features[variable][] = panels_page_allowed_layouts
-project path = profiles/imagex_installkit/modules/imagex/modules

@@ -5,3 +5,17 @@
  */
 
 include_once 'imagex_panels.features.inc';
+
+/**
+ * Implements hook_entity_view().
+ *
+ * Fix for flag module & page manager effecting
+ * panels & panelizer entity link display
+ */
+function imagex_entity_view($entity, $type, $view_mode, $langcode) {
+  // cTools exports the build more "page_manager" which prevents
+  // some flag links showing (maybe other links too)
+  if ($view_mode == 'page_manager' && module_exists('flag')) {
+    flag_entity_view($entity, $type, 'full', $langcode);
+  }
+}

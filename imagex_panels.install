@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_install().
+ */
+function imagex_panels_install() {
+  // Update the panels subtype length to 128 characters in length.
+  // Unfortunately for many of the needs of ImageX, the length of 64 characters
+  // is just simply too short, so therefore update it.
+  $panels_pane_schema = drupal_get_schema('panels_pane');
+  $panels_pane_schema['panels_pane']['fields']['subtype']['length'] = '128';
+  db_change_field('panels_pane', 'subtype', 'subtype', $panels_pane_schema['panels_pane']['fields']['subtype']);
+}
+
+/**
+ * Implements hook_schema_alter().
+ */
+function imagex_panels_schema_alter(&$schema) {
+  $schema['panels_pane']['fields']['subtype']['length'] = '128';
+}

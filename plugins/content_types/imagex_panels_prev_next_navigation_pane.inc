@@ -103,7 +103,7 @@ function imagex_panels_prev_next_navigation_pane_admin_info($subtype, $conf, $co
 }
 
 function imagex_panels_prev_next_navigation_render_output($data = NULL) {
-  // Some validation.
+ // Some validation.
   if (!$data) {
     return FALSE;
   }
@@ -117,7 +117,7 @@ function imagex_panels_prev_next_navigation_render_output($data = NULL) {
    ->fields('n',array('nid', 'title'))
    ->condition('n.status', 1)
    ->condition('n.type', $type)
-   ->condition('n.nid', $nid,'<')
+   ->condition('n.nid', $nid, '<')
    ->orderBy('n.nid', 'DESC')
    ->range(0,1)
    ->execute()
@@ -128,26 +128,15 @@ function imagex_panels_prev_next_navigation_render_output($data = NULL) {
    ->fields('n',array('nid', 'title'))
    ->condition('n.status', 1)
    ->condition('n.type', $type)
-   ->condition('n.created', $nid,'>')
+   ->condition('n.nid', $nid, '>')
    ->orderBy('n.nid', 'ASC')
    ->range(0,1)
    ->execute()
    ->fetchAssoc();
 
   // Set item output.
-  $html_previous = !empty($previous) ? '<li class="previous">'. l('Previous', url('node/'. $previous['nid'])) .'</li>' : FALSE;
-  $html_next = !empty($next) ? '<li class="next">'. l('Next', url('node/'. $next['nid'])) .'</a></li>' : FALSE;
+  $previous_link = !empty($previous) ? t('<a href="@url" class="previous">Previous</a>', array('@url' => url('node/'. $previous['nid'], array('absolute' => TRUE)))) : FALSE;
+  $next_link = !empty($next) ? t('<a href="@url" class="next">Next</a>', array('@url' => url('node/'. $next['nid'], array('absolute' => TRUE)))) : FALSE;
 
-  // Case Prev and Next are not available.
-  if (!$html_previous && !$html_next) {
-    return FALSE;
-  }
-
-  return <<<HTML
-    <div class="imagex_panels_prev_next_navigation">
-        <ul>
-            $html_previous $html_next
-        </ul>
-    </div>
-HTML;
+  return $previous_link . $next_link;
 }

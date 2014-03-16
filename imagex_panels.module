@@ -23,7 +23,7 @@ function imagex_entity_view($entity, $type, $view_mode, $langcode) {
 /**
 * Implementation of hook_ctools_plugin_directory().
 */
-function imagex_prev_next_navigation_ctools_plugin_directory($module, $plugin) {
+function imagex_panels_ctools_plugin_directory($module, $plugin) {
   if ($module == 'ctools' && $plugin == 'content_types') {
     return 'plugins/' . $plugin;
   }
